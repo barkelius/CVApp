@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Swag</string>
+    <string name="app_id">350238440947</string>
+
+    <!-- Places -->
+    <string name="game_place">Games</string>
+    <string name="camera_place">Camera recognition</string>
+
+    <string name="title_activity_game">GameActivity</string>
+    <string name="play_button">Play</string>
+
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_camera">CameraActivity</string>
+</resources>
