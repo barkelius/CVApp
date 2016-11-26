@@ -6,6 +6,7 @@ import android.util.Pair;
 import com.google.common.collect.Lists;
 import com.x.swag.swag.model.game.ai.AI;
 import com.x.swag.swag.model.game.data.GameState;
+import com.x.swag.swag.model.game.impl.chess.board.Board;
 import com.x.swag.swag.model.game.impl.chess.pieces.AbstractChessPiece;
 import com.x.swag.swag.model.game.options.HasDifficulty;
 import com.x.swag.swag.util.log.Logger;

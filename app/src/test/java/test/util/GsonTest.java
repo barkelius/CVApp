@@ -1,7 +1,7 @@
 package test.util;
 
-import com.x.swag.swag.model.game.impl.chess.Board;
-import com.x.swag.swag.model.game.impl.chess.BoardMap;
+import com.x.swag.swag.model.game.impl.chess.board.Board;
+import com.x.swag.swag.model.game.impl.chess.board.BoardMap;
 
 import static org.junit.Assert.*;
 

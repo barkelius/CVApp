@@ -7,18 +7,18 @@ import static com.x.swag.swag.model.game.impl.chess.ChessGame.width;
  */
 public abstract class Position {
 
+    private static final InvalidPosition INVALID_POSITION = new InvalidPosition();
+
     public static final int LEFT = -1, TOP = -1;
     public static final int RIGHT = 1, BOTTOM = 1;
 
-    protected int x;
-    protected int y;
+    protected final int x;
+    protected final int y;
 
     protected Position(int x, int y){
         this.x = x;
         this.y = y;
     }
-
-    protected Position() { }
 
     public static Position of(int x, int y) {
         if(valid(x, y))
@@ -68,17 +68,6 @@ public abstract class Position {
     public abstract Position clone();
     public abstract boolean isValid();
 
-    /*@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Position)) return false;
-        if (o instanceof InvalidPosition) return false;
-
-        Position position = (Position) o;
-
-        return x == position.x && y == position.y;
-    }*/
-
     @Override
     public int hashCode() {
         return 31 * x + y;
@@ -91,31 +80,25 @@ public abstract class Position {
 
 
     public static InvalidPosition invalid(){
-        return new InvalidPosition();
+        return INVALID_POSITION;
     }
 
-
-    public static class InvalidPosition extends Position {
+    private static class InvalidPosition extends Position {
         private InvalidPosition() {
-            super();
-            this.x = -1;
-            this.y = -1;
+            super(-1, -1);
         }
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
+            /*if (this == o) return true;
             if (!(o instanceof Position)) return false;
-            return o instanceof InvalidPosition;
+            return o instanceof InvalidPosition;*/
+            return this == o;
         }
 
-        public Position clone() { return new InvalidPosition(); }
-
+        public Position clone() { return this; }
         public boolean isValid() { return false; }
-
     }
-
-
 
     public static class ValidPosition extends Position {
         private ValidPosition(int x, int y) {
@@ -139,9 +122,7 @@ public abstract class Position {
 
     }
 
-
-
-    public static Position from(int position){
+    public static Position from(final int position){
         return of(position%8, position/8);
     }
 }

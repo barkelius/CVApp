@@ -1,4 +1,4 @@
-package com.x.swag.swag.model.game.impl.chess;
+package com.x.swag.swag.model.game.impl.chess.board;
 
 import static com.x.swag.swag.model.game.impl.chess.ChessGame.width;
 
@@ -6,6 +6,7 @@ import com.google.common.collect.MapMaker;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.x.swag.swag.model.game.impl.chess.Position;
 import com.x.swag.swag.model.game.impl.chess.pieces.AbstractChessPiece;
 import com.x.swag.swag.model.game.impl.chess.pieces.ChessPiece;
 import com.x.swag.swag.model.game.impl.chess.pieces.PieceSerializationAdapter;
@@ -73,7 +74,7 @@ public class BoardMap implements Board {
 
     @Override
     public ChessPiece get(Position position) {
-        if(position instanceof Position.InvalidPosition)
+        if(!position.isValid())
             return new OutOfBoardPiece();
 
         AbstractChessPiece piece = pieces.get(position);
@@ -91,7 +92,7 @@ public class BoardMap implements Board {
      */
     @Override
     public AbstractChessPiece move(Position from, Position to){
-        if(to instanceof Position.InvalidPosition)
+        if(!to.isValid())
             return null;
         AbstractChessPiece moved = pieces.remove(from);
         if(moved != null)
@@ -117,14 +118,14 @@ public class BoardMap implements Board {
         System.out.println("BoardMap: -----");
     }
 
-    @Override
+   /* @Override
     public King findKing(boolean white){
         for (Map.Entry<Position, AbstractChessPiece> entry : pieces.entrySet()) {
             if(entry.getValue().isWhite() == white && entry.getValue() instanceof KingPiece)
                 return new King(entry.getKey(), (KingPiece)entry.getValue());
         }
         throw new IllegalStateException("No " + (white ? "white":"black") + " king on the board");
-    }
+    }*/
 
     @Override
     public Iterable<Map.Entry<Position, AbstractChessPiece>> entries(){

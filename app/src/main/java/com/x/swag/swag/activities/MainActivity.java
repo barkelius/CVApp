@@ -97,7 +97,7 @@ public class MainActivity extends Activity implements
                     .addOnConnectionFailedListener(this)
                     .build();
         }
-        mGoogleApiClient.connect();
+        //mGoogleApiClient.connect();
 
 
 

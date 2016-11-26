@@ -17,7 +17,6 @@ public class PositionTest {
         assertEquals(p.getX(), 0);
         assertEquals(p.getY(), 1);
 
-
         //InvalidPos
         p = Position.of(7, 7);
         assertNotEquals(p, p.moveY(1));

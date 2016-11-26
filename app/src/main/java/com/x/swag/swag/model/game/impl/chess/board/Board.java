@@ -1,8 +1,8 @@
-package com.x.swag.swag.model.game.impl.chess;
+package com.x.swag.swag.model.game.impl.chess.board;
 
+import com.x.swag.swag.model.game.impl.chess.Position;
 import com.x.swag.swag.model.game.impl.chess.pieces.AbstractChessPiece;
 import com.x.swag.swag.model.game.impl.chess.pieces.ChessPiece;
-import com.x.swag.swag.model.game.impl.chess.pieces.impl.KingPiece;
 
 import java.util.Map;
 
@@ -15,18 +15,10 @@ public interface Board {
 
     AbstractChessPiece move(Position from, Position to);
 
-    Board.King findKing(boolean white);
+    //Board.King findKing(boolean white);
 
     Iterable<Map.Entry<Position, AbstractChessPiece>> entries();
 
     Board clone();
 
-    class King {
-        public Position pos;
-        public KingPiece king;
-        public King(Position pos, KingPiece king){
-            this.pos = pos;
-            this.king = king;
-        }
-    }
 }

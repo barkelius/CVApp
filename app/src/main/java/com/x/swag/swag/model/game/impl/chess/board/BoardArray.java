@@ -1,7 +1,7 @@
-package com.x.swag.swag.model.game.impl.chess;
+package com.x.swag.swag.model.game.impl.chess.board;
 
 import com.google.common.collect.Lists;
-import com.x.swag.swag.model.game.impl.chess.Position.InvalidPosition;
+import com.x.swag.swag.model.game.impl.chess.Position;
 import com.x.swag.swag.model.game.impl.chess.pieces.AbstractChessPiece;
 import com.x.swag.swag.model.game.impl.chess.pieces.ChessPiece;
 import com.x.swag.swag.model.game.impl.chess.pieces.impl.BishopPiece;
@@ -70,17 +70,17 @@ public class BoardArray implements Board {
 
     @Override
     public ChessPiece get(Position position) {
-        if(position instanceof InvalidPosition)
+        if (!position.isValid())
             return new OutOfBoardPiece();
         ChessPiece piece = board[position.getX()][position.getY()];
-        if(piece == null)
+        if (piece == null)
             return new EmptyPiece();
         return piece;
     }
 
     @Override
     public AbstractChessPiece move(Position from, Position to) {
-        if(from instanceof InvalidPosition || to instanceof InvalidPosition)
+        if (!from.isValid() || !to.isValid())
             return null;
         ChessPiece moved = get(from);
         board[from.getX()][from.getY()] = null;
@@ -90,18 +90,6 @@ public class BoardArray implements Board {
             return replaced instanceof AbstractChessPiece ? (AbstractChessPiece)replaced : null;
         }
         return null;
-    }
-
-    @Override
-    public King findKing(boolean white) {
-        for (int col = 0; col < width; ++col) {
-            for (int row = 0; row < width; ++row) {
-                ChessPiece p = board[col][row];
-                if(p instanceof KingPiece && ((KingPiece)p).isWhite())
-                    return new King(Position.of(col, row), ((KingPiece) p));
-            }
-        }
-        throw new IllegalStateException("No " + (white ? "white":"black") + " king on the board");
     }
 
 

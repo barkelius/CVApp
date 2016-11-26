@@ -1,6 +1,6 @@
 package com.x.swag.swag.model.game.impl.chess.pieces;
 
-import com.x.swag.swag.model.game.impl.chess.Board;
+import com.x.swag.swag.model.game.impl.chess.board.Board;
 import com.x.swag.swag.model.game.impl.chess.Position;
 import com.x.swag.swag.model.game.impl.chess.pieces.impl.KingPiece;
 
@@ -43,7 +43,7 @@ public abstract class AbstractChessPiece implements ChessPiece {
 
 
     protected void addIfEnemy(List<Position> positions, Board board, Position position, boolean includeKing){
-        if(position instanceof Position.InvalidPosition)
+        if (!position.isValid())
             return;
 
         ChessPiece piece = board.get(position);
@@ -58,11 +58,11 @@ public abstract class AbstractChessPiece implements ChessPiece {
     }
 
     protected void addIfEmpty(List<Position> positions, Board board, Position position){
-        if(position instanceof Position.InvalidPosition)
+        if (!position.isValid())
             return;
 
         ChessPiece piece = board.get(position);
-        if(piece.isEmpty())
+        if (piece.isEmpty())
             positions.add(position);
     }
     protected void addIfEnemyOrEmpty(List<Position> positions, Board board, Position position){

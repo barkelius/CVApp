@@ -11,9 +11,14 @@ import com.x.swag.swag.model.game.TurnGameImpl;
 import com.x.swag.swag.model.game.ai.AI;
 import com.x.swag.swag.model.game.ai.HasAI;
 import com.x.swag.swag.model.game.data.GameState;
+import com.x.swag.swag.model.game.impl.chess.board.Board;
+import com.x.swag.swag.model.game.impl.chess.board.BoardArray;
+import com.x.swag.swag.model.game.impl.chess.board.BoardMap;
+import com.x.swag.swag.model.game.impl.chess.board.BoardUtil;
 import com.x.swag.swag.model.game.impl.chess.pieces.AbstractChessPiece;
 import com.x.swag.swag.model.game.impl.chess.pieces.ChessPiece;
 import com.x.swag.swag.model.game.options.HasDifficulty;
+import com.x.swag.swag.util.log.Logger;
 
 import java.util.List;
 import java.util.Map;
@@ -66,7 +71,7 @@ public class ChessGame extends TurnGameImpl implements HasAI, HasDifficulty {
     }
 
     private List<Position> getCheckedPositions(Board b){
-        Board.King king = b.findKing(isWhiteTurn());
+        BoardUtil.King king = BoardUtil.findKing(b, isWhiteTurn());
         return king.king.checked(b, king.pos);
     }
 
@@ -123,7 +128,8 @@ public class ChessGame extends TurnGameImpl implements HasAI, HasDifficulty {
                     @Override public AbstractChessPiece apply(Map.Entry<Position, AbstractChessPiece> e) {
                         return e.getValue();
                     }
-                }).toList();
+                })
+                .toList();
 
         for (AbstractChessPiece p : remainingPieces) {
             Integer currCount = piecesLeft.get(p.value());
@@ -132,7 +138,7 @@ public class ChessGame extends TurnGameImpl implements HasAI, HasDifficulty {
             piecesLeft.put(p.value(), ++currCount);
         }
 
-        System.out.println("Remaining pieces in map: "+whiteTeam + ": " + piecesLeft);
+        Logger.log(getClass(), "Remaining pieces in map: white:"+whiteTeam + ": " + piecesLeft);
         ImmutableList<AbstractChessPiece> removed = FluentIterable.from(new BoardMap().entries())
                 .filter(new Predicate<Map.Entry<Position, AbstractChessPiece>>() {
                     @Override public boolean apply(Map.Entry<Position, AbstractChessPiece> e) {
@@ -162,7 +168,7 @@ public class ChessGame extends TurnGameImpl implements HasAI, HasDifficulty {
                 .toList();
 
 
-        System.out.println("Removedx for: "+whiteTeam + ": " + removed.toString());
+        Logger.log(getClass(), "Removed for: white:"+whiteTeam + ": " + removed.toString());
         return removed;
     }
 

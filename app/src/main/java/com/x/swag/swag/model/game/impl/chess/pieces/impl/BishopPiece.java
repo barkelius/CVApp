@@ -1,6 +1,6 @@
 package com.x.swag.swag.model.game.impl.chess.pieces.impl;
 
-import com.x.swag.swag.model.game.impl.chess.Board;
+import com.x.swag.swag.model.game.impl.chess.board.Board;
 import com.x.swag.swag.model.game.impl.chess.Position;
 import com.x.swag.swag.model.game.impl.chess.pieces.AbstractChessPiece;
 
@@ -31,7 +31,7 @@ public class BishopPiece extends AbstractChessPiece {
             throw new IllegalArgumentException(board.get(pos).getClass().getSimpleName() + " Not an instance of: " + getClass().getSimpleName() + ", pos:" + pos);
 
         List<Position> valid = new ArrayList<>();
-        Position tmp = Position.invalid();
+        Position tmp;
 
         for(tmp = pos.moveTopRight(); board.get(tmp).isEmpty(); tmp = tmp.moveTopRight())
             valid.add(tmp);

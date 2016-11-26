@@ -1,6 +1,6 @@
 package com.x.swag.swag.model.game.impl.chess.pieces;
 
-import com.x.swag.swag.model.game.impl.chess.Board;
+import com.x.swag.swag.model.game.impl.chess.board.Board;
 import com.x.swag.swag.model.game.impl.chess.Position;
 
 import java.util.List;
